@@ -31,3 +31,13 @@ function addParagraph(text)
     addedChilds += 1;
     document.body.append(paragraph);
 }
+
+function addAudio(path, showControls)
+{
+    var audio = document.createElement("audio");
+    audio.src = path;
+    audio.controls = showControls;
+    audio.id = `${addedChilds}`;
+    addedChilds += 1;
+    document.body.append(audio);
+}
