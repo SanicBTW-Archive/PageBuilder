@@ -53,3 +53,9 @@ function addButton(text, onClick, id)
     addedChilds += 1;
     document.body.append(button);
 }
+
+function setStyle(id, style)
+{
+    var element = document.getElementById(id);
+    element.style = style;
+}
