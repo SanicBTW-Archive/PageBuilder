@@ -1,0 +1,1 @@
+setBG('./Nuevo proyecto.png');
