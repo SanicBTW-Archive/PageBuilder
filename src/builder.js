@@ -41,3 +41,15 @@ function addAudio(path, showControls)
     addedChilds += 1;
     document.body.append(audio);
 }
+
+function addButton(text, onClick )
+{
+    var button = document.createElement("button");
+    button.addEventListener("click", (click) => {
+        onClick();
+    });
+    button.innerText = text;
+    button.id = `${addedChilds}`;
+    addedChilds += 1;
+    document.body.append(button);
+}
