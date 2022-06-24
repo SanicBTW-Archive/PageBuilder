@@ -1,1 +1,0 @@
-setBG('./Nuevo proyecto.png');
