@@ -1,7 +1,7 @@
 define(["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.addImage = exports.setBackground = void 0;
+    exports.addHeader = exports.addImage = exports.setBackground = void 0;
     var addedChilds = 0;
     function setBackground(path) {
         document.body.style.cssText = `background-image: url('${path}')`;
@@ -15,4 +15,12 @@ define(["require", "exports"], function (require, exports) {
         document.body.append(img);
     }
     exports.addImage = addImage;
+    function addHeader(text, type) {
+        var header = document.createElement(type);
+        header.innerText = text;
+        header.id = `${addedChilds}`;
+        addedChilds += 1;
+        document.body.append(header);
+    }
+    exports.addHeader = addHeader;
 });

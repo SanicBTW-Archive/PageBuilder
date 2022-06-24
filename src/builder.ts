@@ -13,3 +13,12 @@ export function addImage(path:string)
     addedChilds += 1;
     document.body.append(img);
 }
+
+export function addHeader(text:string, type:any)
+{
+    var header = document.createElement(type);
+    header.innerText = text;
+    header.id = `${addedChilds}`;
+    addedChilds += 1;
+    document.body.append(header);
+}
