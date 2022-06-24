@@ -5,51 +5,51 @@ function setBackground(path)
     document.body.style.cssText = `background-image: url('${path}')`;
 }
 
-function addImage(path)
+function addImage(path, id)
 {
     var img = document.createElement("img");
     img.src = path;
-    img.id = `${addedChilds}`;
+    img.id =  `${id != null ? id : addedChilds}`;
     addedChilds += 1;
     document.body.append(img);
 }
 
-function addHeader(text, type)
+function addHeader(text, type, id)
 {
     var header = document.createElement(type);
     header.innerText = text;
-    header.id = `${addedChilds}`;
+    header.id = `${id != null ? id : addedChilds}`;
     addedChilds += 1;
     document.body.append(header);
 }
 
-function addParagraph(text)
+function addParagraph(text, id)
 {
     var paragraph = document.createElement("p");
     paragraph.innerText = text;
-    paragraph.id = `${addedChilds}`;
+    paragraph.id = `${id != null ? id : addedChilds}`;
     addedChilds += 1;
     document.body.append(paragraph);
 }
 
-function addAudio(path, showControls)
+function addAudio(path, showControls, id)
 {
     var audio = document.createElement("audio");
     audio.src = path;
     audio.controls = showControls;
-    audio.id = `${addedChilds}`;
+    audio.id = `${id != null ? id : addedChilds}`;
     addedChilds += 1;
     document.body.append(audio);
 }
 
-function addButton(text, onClick )
+function addButton(text, onClick, id)
 {
     var button = document.createElement("button");
     button.addEventListener("click", (click) => {
         onClick();
     });
     button.innerText = text;
-    button.id = `${addedChilds}`;
+    button.id = `${id != null ? id : addedChilds}`;
     addedChilds += 1;
     document.body.append(button);
 }
