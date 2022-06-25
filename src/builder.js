@@ -1,6 +1,6 @@
 var addedChilds = 0;
 var platform = "";
-var elementsHandlerVersion = "BETA 0.1.1";
+var elementsHandlerVersion = "BETA 0.1.2";
 var stylesHandlerVersion = "BETA 0.0.3";
 var printedVersions = false;
 
@@ -124,7 +124,7 @@ class ElementsHandler extends Base
     /**
      * 
      * @param {string} path The audio path
-     * @param {boolean} showControls Should it show controls?
+     * @param {boolean} showControls Toggle controls
      * @param {string} id The Element ID
      */
     addAudio(path, showControls, id)
@@ -206,6 +206,24 @@ class ElementsHandler extends Base
         var element = document.getElementById(id);
         element.className = className;
     }
+
+    /**
+     * 
+     * @param {string} path The video path
+     * @param {number} width The player width
+     * @param {boolean} showControls Toggle controls
+     * @param {string} id The Element ID
+     */
+    addVideo(path, width, showControls, id)
+    {
+        var video = document.createElement("video");
+        video.src = path;
+        video.id = `${id != null ? id : addedChilds}`;
+        addedChilds += 1;
+        video.width = width;
+        video.controls = showControls;
+        document.body.append(video);
+    }
 }
 
 class StylesHandler extends Base
@@ -224,7 +242,7 @@ class StylesHandler extends Base
     setBackground(path, repeatStyle, sizeStyle)
     {
         document.body.style = `background-image: url('${path}')`;
-        
+
         //i forgot it was .cssText += but i have a function for it sooo
         this.setBodyStyle(`background-repeat: ${repeatStyle != null ? repeatStyle : 'repeat'};`);
         this.setBodyStyle(`background-size: ${sizeStyle != null ? sizeStyle : 'auto'};`);
