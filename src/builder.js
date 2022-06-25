@@ -83,3 +83,11 @@ function appendTo(toAppend, where)
     var whatTo = document.getElementById(toAppend);
     appendLoc.appendChild(whatTo);
 }
+
+function addDiv(id)
+{
+    var newDiv = document.createElement("div");
+    newDiv.id = `${id != null ? id : addedChilds}`;
+    addedChilds += 1;
+    document.body.append(newDiv);
+}

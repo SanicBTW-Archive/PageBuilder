@@ -1,8 +1,17 @@
 setBackground('./Nuevo proyecto.png');
 setGlobalStyle("font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;");
+
+addDiv("mainDiv");
+setStyle("mainDiv", "background-color: aqua;");
+
 addHeader("hola", "h1", "header1");
+appendTo("header1", "mainDiv");
+
 addParagraph("tu puta madre me da sexo a diario", "p1");
-addAudio('./test.ogg', false, "audio1");
+appendTo("p1", "mainDiv");
+
+addAudio('./test.ogg', true, "audio1");
+appendTo('audio1', "mainDiv");
 
 addButton("holaa", function xd() {
     alert("hola")
