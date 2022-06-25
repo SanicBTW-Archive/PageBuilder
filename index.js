@@ -30,6 +30,12 @@ addButton("add button", function add() {
     document.body.append(newB);
 });
 
-addAnchor("https://discord.com", "discord", "discordAnch");
+addAnchor("https://discord.com", "discord", "discordAnch1");
+setStyle('discordAnch1', "color: transparent; font-size: 0px; margin-left: 1rem;")
+
+addImage("./pyro.png", "pyrojaja");
+setStyle("pyrojaja", "width: 50rem")
+
+appendTo("pyrojaja", "discordAnch1");
 
 setStyle("buttonplay", "background-color: black; color: white;");

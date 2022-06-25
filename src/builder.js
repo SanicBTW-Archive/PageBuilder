@@ -75,3 +75,11 @@ function addAnchor(link, text, id)
     addedChilds += 1;
     document.body.append(anch);
 }
+
+//might improve it
+function appendTo(toAppend, where)
+{
+    var appendLoc = document.getElementById(where);
+    var whatTo = document.getElementById(toAppend);
+    appendLoc.appendChild(whatTo);
+}
