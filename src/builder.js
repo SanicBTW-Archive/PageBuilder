@@ -1,4 +1,5 @@
 var addedChilds = 0;
+var platform = "";
 
 function setBackground(path)
 {
@@ -91,3 +92,10 @@ function addDiv(id)
     addedChilds += 1;
     document.body.append(newDiv);
 }
+
+//from https://www.w3resource.com/javascript-exercises/fundamental/javascript-fundamental-exercise-72.php
+const detectDeviceType = () => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+    ? 'Mobile'
+    : 'Desktop';
+platform = detectDeviceType();
+
