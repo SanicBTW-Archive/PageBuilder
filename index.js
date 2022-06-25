@@ -31,6 +31,4 @@ styles.setStyle(["centerHeader", "alsoKnownAs", "lol"], "font-family: 'Courier N
 
 elements.appendTo("mainDiv", "first");
 
-elements.appendTo("centerHeader", "mainDiv");
-elements.appendTo("alsoKnownAs", "mainDiv");
-elements.appendTo("lol", "mainDiv");
+elements.appendTo(["centerHeader", "alsoKnownAs", "lol"], "mainDiv");

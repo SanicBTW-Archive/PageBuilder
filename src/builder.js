@@ -1,7 +1,7 @@
 var addedChilds = 0;
 var platform = "";
 //if you are copying this to your project (idk how to make it easy to import on a html file) please dont modify these
-var elementsHandlerVersion = "BETA 0.1.3";
+var elementsHandlerVersion = "BETA 0.1.4";
 var stylesHandlerVersion = "BETA 0.0.6";
 var printedVersions = false;
 
@@ -175,14 +175,26 @@ class ElementsHandler extends Base
 
     /**
      * 
-     * @param {string} toAppend What is going to be appended (as a child)
+     * @param {string | string[]} toAppend What is going to be appended (as a child)
      * @param {string} where Where the element is going to be appended (as a child)
      */
     appendTo(toAppend, where)
     {
-        var appendLoc = document.getElementById(where);
-        var whatTo = document.getElementById(toAppend);
-        appendLoc.appendChild(whatTo);
+        if(Array.isArray(toAppend))
+        {
+            for(var i in toAppend)
+            {
+                var appendLoc = document.getElementById(where);
+                var whatTo = document.getElementById(toAppend[i]);
+                appendLoc.appendChild(whatTo);
+            }
+        }
+        else
+        {
+            var appendLoc = document.getElementById(where);
+            var whatTo = document.getElementById(toAppend);
+            appendLoc.appendChild(whatTo);
+        }
     }
 
     /**
