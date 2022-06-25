@@ -1,17 +1,39 @@
 var addedChilds = 0;
 var platform = "";
-var ver = "BETA 0.0.16";
+var elementsver = "BETA 0.1.0";
+var stylesver = "BETA 0.0.0"; //not implemented
 
-class Builder
+class Base
 {
-    constructor()
+    checkPlatform()
     {
         const detectDeviceType = () => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
             ? 'Mobile'
             : 'Desktop';
         platform = detectDeviceType();
         console.log("Platform: " + platform);
+    }
 
+    //uses optf file extension handler, really simplified
+    setupVersions()
+    {
+        var versionsFile = fetch('./versions.optf'); //when current commit change to the repo file
+        versionsFile.then((resp) => {
+            resp.text().then((text) => {
+                var entries = text.trim().split("\n");
+                for(var i in entries)
+                {
+                    var elementsFVer = entries[0];
+                    var stylesFVer = entries[1];
+                }
+            })
+        });
+    }
+
+    checkVersion()
+    {
+        console.log("version checking disabled for this version")
+        /*
         //might improve it soon
         var versionFileGithub = fetch('https://raw.githubusercontent.com/SanicBTW/PageBuilder/master/version.txt');
         versionFileGithub.then((resp) => {
@@ -33,7 +55,19 @@ class Builder
                 }
 
             });
-        });
+        });*/
+    }
+
+}
+
+class Elements extends Base
+{
+    constructor()
+    {
+        super();
+        this.checkPlatform();
+        this.setupVersions();
+        this.checkVersion();
     }
 
     /**
@@ -205,4 +239,14 @@ class Builder
         newCSS.innerHTML = `.${className} { ${style} }`;
         document.head.appendChild(newCSS);
     }
+
+}
+
+class Styles extends Base
+{
+    constructor()
+    {
+
+    }
+    
 }
