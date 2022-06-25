@@ -30,4 +30,6 @@ addButton("add button", function add() {
     document.body.append(newB);
 });
 
+addAnchor("https://discord.com", "discord", "discordAnch");
+
 setStyle("buttonplay", "background-color: black; color: white;");

@@ -65,3 +65,13 @@ function setGlobalStyle(style)
 {
     document.body.style.cssText += style;
 }
+
+function addAnchor(link, text, id)
+{
+    var anch = document.createElement("a");
+    anch.href = link;
+    anch.innerText = text;
+    anch.id = `${id != null ? id : addedChilds}`;
+    addedChilds += 1;
+    document.body.append(anch);
+}
