@@ -22,10 +22,15 @@ elements.setClass("first", "outer");
 elements.addHeader("Everyone is so mean to me", "h1", "why");
 elements.addBreakline("break");
 styles.setStyle("why", "text-align: center;");
-elements.addAudio('./assets/audio/test.ogg', true, "audio1");
+
+elements.addHeader("Sanco", "h1", "centerHeader");
+elements.addParagraph("aka 'SanicBTW', 'Sanic', 'Saniczoned'", "alsoKnownAs");
+elements.addParagraph("and idk what else", "lol");
+
+styles.setStyle(["centerHeader", "alsoKnownAs", "lol"], "font-family: 'Courier New', Courier, monospace; text-align: left;");
 
 elements.appendTo("mainDiv", "first");
 
-elements.appendTo("why", "mainDiv");
-elements.appendTo("break", "mainDiv");
-elements.appendTo("audio1", "mainDiv");
+elements.appendTo("centerHeader", "mainDiv");
+elements.appendTo("alsoKnownAs", "mainDiv");
+elements.appendTo("lol", "mainDiv");

@@ -2,7 +2,7 @@ var addedChilds = 0;
 var platform = "";
 //if you are copying this to your project (idk how to make it easy to import on a html file) please dont modify these
 var elementsHandlerVersion = "BETA 0.1.3";
-var stylesHandlerVersion = "BETA 0.0.5";
+var stylesHandlerVersion = "BETA 0.0.6";
 var printedVersions = false;
 
 class Base
@@ -263,13 +263,24 @@ class StylesHandler extends Base
 
     /**
      * 
-     * @param {string} id The Element ID to assign the style to
+     * @param {string | string[]} id The Element ID to assign the style to
      * @param {string} style The style you want to assign to the element
      */
     setStyle(id, style)
     {
-        var element = document.getElementById(id);
-        element.style.cssText += style;
+        if(Array.isArray(id))
+        {
+            for(var i in id)
+            {
+                var element = document.getElementById(id[i]);
+                element.style.cssText += style;
+            }
+        }
+        else
+        {
+            var element = document.getElementById(id);
+            element.style.cssText += style;    
+        }
     }
 
     /**
