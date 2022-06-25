@@ -1,5 +1,5 @@
 setBackground('./src/images/template/Nuevo proyecto.png');
-setGlobalStyle("font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;");
+setBodyStyle("font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;");
 
 addDiv("mainDiv");
 setStyle("mainDiv", "background-color: aqua;");

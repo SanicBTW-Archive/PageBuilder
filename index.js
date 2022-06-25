@@ -1,2 +1,2 @@
 addDiv("mainDiv");
-setGlobalStyle("font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;");
+setBodyStyle("font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;");

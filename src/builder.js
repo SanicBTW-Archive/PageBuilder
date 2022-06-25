@@ -62,7 +62,7 @@ function setStyle(id, style)
     element.style = style;
 }
 
-function setGlobalStyle(style)
+function setBodyStyle(style)
 {
     document.body.style.cssText += style;
 }
