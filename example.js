@@ -48,3 +48,14 @@ setStyle("pyrojaja", "width: 50rem")
 appendTo("pyrojaja", "discordAnch1");
 
 setStyle("buttonplay", "background-color: black; color: white;");
+
+if(platform == "Desktop")
+{
+    addHeader("Sup desktop user", "h1", "daPlatform");
+}
+else
+{
+    addHeader("Sup mobile user", "h1", "daPlatform");
+}
+
+appendTo("daPlatform", "mainDiv");
