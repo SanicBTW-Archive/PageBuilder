@@ -1,7 +1,7 @@
 var addedChilds = 0;
 var platform = "";
 var elementsHandlerVersion = "BETA 0.1.1";
-var stylesHandlerVersion = "BETA 0.0.2";
+var stylesHandlerVersion = "BETA 0.0.3";
 var printedVersions = false;
 
 class Base
@@ -218,10 +218,16 @@ class StylesHandler extends Base
     /**
      * 
      * @param {string} path The background path
+     * @param {string} repeatStyle Sets the repeat style (repeat, no-repeat)
+     * @param {string} sizeStyle Sets the size style (auto, contain, cover)
      */
-    setBackground(path)
+    setBackground(path, repeatStyle, sizeStyle)
     {
         document.body.style = `background-image: url('${path}')`;
+        
+        //i forgot it was .cssText += but i have a function for it sooo
+        this.setBodyStyle(`background-repeat: ${repeatStyle != null ? repeatStyle : 'repeat'};`);
+        this.setBodyStyle(`background-size: ${sizeStyle != null ? sizeStyle : 'auto'};`);
     }
 
     /**
