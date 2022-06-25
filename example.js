@@ -1,33 +1,34 @@
-setBackground('./src/images/template/Nuevo proyecto.png');
-setBodyStyle("font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;");
+var base = new Builder();
+base.setBackground('./src/images/template/Nuevo proyecto.png');
+base.setBodyStyle("font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;");
 
-addDiv("mainDiv");
-setStyle("mainDiv", "background-color: aqua;");
+base.addDiv("mainDiv");
+base.setStyle("mainDiv", "background-color: aqua;");
 
-addHeader("hola", "h1", "header1");
-appendTo("header1", "mainDiv");
+base.addHeader("hola", "h1", "header1");
+base.appendTo("header1", "mainDiv");
 
-addParagraph("tu puta madre me da sexo a diario", "p1");
-appendTo("p1", "mainDiv");
+base.addParagraph("tu puta madre me da sexo a diario", "p1");
+base.appendTo("p1", "mainDiv");
 
-addAudio('./src/audio/template/test.ogg', true, "audio1");
-appendTo('audio1', "mainDiv");
+base.addAudio('./src/audio/template/test.ogg', true, "audio1");
+base.appendTo('audio1', "mainDiv");
 
-addButton("holaa", function xd() {
+base.addButton("holaa", function xd() {
     alert("hola")
 }, "button1");
 
-addButton("play", function play() {
+base.addButton("play", function play() {
     var the = document.getElementById("audio1");
     the.play();
 }, "buttonplay");
 
-addButton("stop", function play() {
+base.addButton("stop", function play() {
     var the = document.getElementById("audio1");
     the.pause();
 }, "buttonstop");
 
-addButton("add button", function add() {
+base.addButton("add button", function add() {
     var newB = document.createElement("button");
     newB.innerText = `Child: ${addedChilds}`;
     newB.id = `${addedChilds}`;
@@ -39,23 +40,23 @@ addButton("add button", function add() {
     document.body.append(newB);
 });
 
-addAnchor("https://discord.com", "discord", "discordAnch1");
-setStyle('discordAnch1', "color: transparent; font-size: 0px; margin-left: 1rem;")
+base.addAnchor("https://discord.com", "discord", "discordAnch1");
+base.setStyle('discordAnch1', "color: transparent; font-size: 0px; margin-left: 1rem;")
 
-addImage("./src/images/template/pyro.png", "pyrojaja");
-setStyle("pyrojaja", "width: 50rem")
+base.addImage("./src/images/template/pyro.png", "pyrojaja");
+base.setStyle("pyrojaja", "width: 50rem")
 
-appendTo("pyrojaja", "discordAnch1");
+base.appendTo("pyrojaja", "discordAnch1");
 
-setStyle("buttonplay", "background-color: black; color: white;");
+base.setStyle("buttonplay", "background-color: black; color: white;");
 
 if(platform == "Desktop")
 {
-    addHeader("Sup desktop user", "h1", "daPlatform");
+    base.addHeader("Sup desktop user", "h1", "daPlatform");
 }
 else
 {
-    addHeader("Sup mobile user", "h1", "daPlatform");
+    base.addHeader("Sup mobile user", "h1", "daPlatform");
 }
 
-appendTo("daPlatform", "mainDiv");
+base.appendTo("daPlatform", "mainDiv");
