@@ -1,6 +1,6 @@
 var addedChilds = 0;
 var platform = "";
-var ver = "BETA 0.0.14";
+var ver = "BETA 0.0.15";
 
 class Builder
 {
@@ -11,8 +11,27 @@ class Builder
             : 'Desktop';
         platform = detectDeviceType();
         console.log("Platform: " + platform);
-        //check builder version
-        console.log("CURRENT VERSION: " + ver);
+
+        //might improve it soon
+        var versionFileGithub = fetch('https://raw.githubusercontent.com/SanicBTW/PageBuilder/master/version.txt');
+        versionFileGithub.then((resp) => {
+            resp.text().then((gitVer) => {
+                console.log("GITHUB VERSION: " + gitVer);
+                console.log("CURRENT VERSION: " + ver);
+                if(ver > gitVer)
+                {
+                    console.warn("[WARNING - Version checker]\nCurrent version is newer than the old version\nPush commit or check the Github version");
+                }
+                if(ver == gitVer)
+                {
+                    console.info("[INFO - Version checker]\nUp to date");
+                }
+                if(ver < gitVer)
+                {
+                    console.error("[ERROR - Version checker]\nGithub version is newer\nCheck the current version and check the Github version");
+                }
+            });
+        });
     }
 
     setBackground(path)
@@ -104,5 +123,11 @@ class Builder
         newDiv.id = `${id != null ? id : addedChilds}`;
         addedChilds += 1;
         document.body.append(newDiv);
+    }
+
+    setClass(id, className)
+    {
+        var element = document.getElementById(id);
+        element.className = className;
     }
 }
