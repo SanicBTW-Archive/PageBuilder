@@ -1,7 +1,7 @@
 var addedChilds = 0;
 var platform = "";
 var elementsHandlerVersion = "BETA 0.1.2";
-var stylesHandlerVersion = "BETA 0.0.3";
+var stylesHandlerVersion = "BETA 0.0.4";
 var printedVersions = false;
 
 class Base
@@ -278,5 +278,17 @@ class StylesHandler extends Base
         var newCSS = document.createElement("style");
         newCSS.innerHTML = `.${className} { ${style} }`;
         document.head.appendChild(newCSS);
+    }
+
+    /**
+     * 
+     * @param {string} path Favicon path
+     */
+    setFavicon(path)
+    {
+        var icon = document.createElement("link");
+        icon.setAttribute('rel', "shortcut icon");
+        icon.setAttribute("href", path);
+        document.head.appendChild(icon);
     }
 }
