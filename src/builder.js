@@ -1,5 +1,6 @@
 var addedChilds = 0;
 var platform = "";
+//if you are copying this to your project (idk how to make it easy to import on a html file) please dont modify these
 var elementsHandlerVersion = "BETA 0.1.2";
 var stylesHandlerVersion = "BETA 0.0.4";
 var printedVersions = false;
