@@ -1,15 +1,15 @@
 var elements = new ElementsHandler();
-/*var base = new Builder();
-var styles = new Styles();
-base.setBackground("./src/images/mean.jpeg");
+var styles = new StylesHandler();
 
-base.addDiv("mainDiv");
+styles.setBackground("./src/images/mean.jpeg");
 
-base.setBodyStyle("font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;");
-base.setClassStyle("mainStyle", "background-color: white;");
+elements.addDiv("mainDiv");
 
-base.setClass("mainDiv", "mainStyle");
+styles.setBodyStyle("font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;");
+styles.setClassStyle("mainStyle", "background-color: white;");
 
-base.addHeader("Everyone is so mean 2 me", "h1", "why");
+elements.setClass("mainDiv", "mainStyle");
 
-base.appendTo("why", "mainDiv");*/
+elements.addHeader("Everyone is so mean 2 me", "h1", "why");
+
+elements.appendTo("why", "mainDiv");

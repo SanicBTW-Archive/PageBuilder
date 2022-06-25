@@ -1,7 +1,7 @@
 var addedChilds = 0;
 var platform = "";
 var elementsHandlerVersion = "BETA 0.1.1";
-var stylesHandlerVersion = "BETA 0.0.0";
+var stylesHandlerVersion = "BETA 0.0.2";
 var printedVersions = false;
 
 class Base
@@ -76,15 +76,6 @@ class ElementsHandler extends Base
         super();
         this.checkPlatform();
         this.checkVersion();
-    }
-
-    /**
-     * 
-     * @param {string} path The background path
-     */
-    setBackground(path)
-    {
-        document.body.style = `background-image: url('${path}')`;
     }
 
     /**
@@ -167,26 +158,6 @@ class ElementsHandler extends Base
 
     /**
      * 
-     * @param {string} id The Element ID to assign the style to
-     * @param {string} style The style you want to assign to the element
-     */
-    setStyle(id, style)
-    {
-        var element = document.getElementById(id);
-        element.style = style;
-    }
-
-    /**
-     * 
-     * @param {string} style Add CSS styling to the body
-     */
-    setBodyStyle(style)
-    {
-        document.body.style.cssText += style;
-    }
-
-    /**
-     * 
      * @param {string} link Where does the "A" redirects you to
      * @param {string} text Text to display
      * @param {string} id The Element ID
@@ -212,7 +183,7 @@ class ElementsHandler extends Base
         var whatTo = document.getElementById(toAppend);
         appendLoc.appendChild(whatTo);
     }
-    
+
     /**
      * 
      * @param {string} id The Element ID
@@ -235,6 +206,43 @@ class ElementsHandler extends Base
         var element = document.getElementById(id);
         element.className = className;
     }
+}
+
+class StylesHandler extends Base
+{
+    constructor()
+    {
+        super();
+    }
+
+    /**
+     * 
+     * @param {string} path The background path
+     */
+    setBackground(path)
+    {
+        document.body.style = `background-image: url('${path}')`;
+    }
+
+    /**
+     * 
+     * @param {string} id The Element ID to assign the style to
+     * @param {string} style The style you want to assign to the element
+     */
+    setStyle(id, style)
+    {
+        var element = document.getElementById(id);
+        element.style = style;
+    }
+
+    /**
+     * 
+     * @param {string} style Add CSS styling to the body
+     */
+    setBodyStyle(style)
+    {
+        document.body.style.cssText += style;
+    }
 
     /**
      * 
@@ -247,14 +255,4 @@ class ElementsHandler extends Base
         newCSS.innerHTML = `.${className} { ${style} }`;
         document.head.appendChild(newCSS);
     }
-
-}
-
-class Styles extends Base
-{
-    constructor()
-    {
-
-    }
-    
 }
