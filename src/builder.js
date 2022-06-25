@@ -2,7 +2,7 @@ var addedChilds = 0;
 
 function setBackground(path)
 {
-    document.body.style.cssText = `background-image: url('${path}')`;
+    document.body.style = `background-image: url('${path}')`;
 }
 
 function addImage(path, id)
@@ -48,6 +48,7 @@ function addButton(text, onClick, id)
     button.addEventListener("click", (click) => {
         onClick();
     });
+    button.type = "button";
     button.innerText = text;
     button.id = `${id != null ? id : addedChilds}`;
     addedChilds += 1;
@@ -58,4 +59,9 @@ function setStyle(id, style)
 {
     var element = document.getElementById(id);
     element.style = style;
+}
+
+function setGlobalStyle(style)
+{
+    document.body.style.cssText += style;
 }

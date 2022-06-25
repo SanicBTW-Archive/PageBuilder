@@ -17,4 +17,5 @@ addButton("stop", function play() {
     the.pause();
 }, "buttonstop");
 
-setStyle("buttonplay", "background-color: black; color: white;")
+setStyle("buttonplay", "background-color: black; color: white;");
+setGlobalStyle("font-family: 'Courier New', Courier, monospace; color: white;");
