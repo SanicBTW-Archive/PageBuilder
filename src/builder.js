@@ -1,7 +1,7 @@
 var addedChilds = 0;
 var platform = "";
 //if you are copying this to your project (idk how to make it easy to import on a html file) please dont modify these
-var elementsHandlerVersion = "BETA 0.1.2";
+var elementsHandlerVersion = "BETA 0.1.3";
 var stylesHandlerVersion = "BETA 0.0.5";
 var printedVersions = false;
 
@@ -224,6 +224,18 @@ class ElementsHandler extends Base
         video.width = width;
         video.controls = showControls;
         document.body.append(video);
+    }
+
+    /**
+     * 
+     * @param {string} id The Element ID
+     */
+    addBreakline(id)
+    {
+        var breakLine = document.createElement("br");
+        breakLine.id = `${id != null ? id : addedChilds}`;
+        addedChilds += 1;
+        document.body.append(breakLine);
     }
 }
 

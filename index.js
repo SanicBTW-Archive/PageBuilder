@@ -20,10 +20,12 @@ elements.addDiv("mainDiv");
 elements.setClass("first", "outer");
 
 elements.addHeader("Everyone is so mean to me", "h1", "why");
+elements.addBreakline("break");
 styles.setStyle("why", "text-align: center;");
 elements.addAudio('./assets/audio/test.ogg', true, "audio1");
 
 elements.appendTo("mainDiv", "first");
 
 elements.appendTo("why", "mainDiv");
+elements.appendTo("break", "mainDiv");
 elements.appendTo("audio1", "mainDiv");
