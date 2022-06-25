@@ -1,9 +1,10 @@
-var base = new Builder();
-base.setBackground('./src/images/template/Nuevo proyecto.png');
-base.setBodyStyle("font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;");
+var base = new ElementsHandler();
+var styles = new StylesHandler();
+styles.setBackground('./src/images/template/Nuevo proyecto.png');
+styles.setBodyStyle("font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;");
 
 base.addDiv("mainDiv");
-base.setStyle("mainDiv", "background-color: aqua;");
+styles.setStyle("mainDiv", "background-color: aqua;");
 
 base.addHeader("hola", "h1", "header1");
 base.appendTo("header1", "mainDiv");
@@ -41,14 +42,14 @@ base.addButton("add button", function add() {
 });
 
 base.addAnchor("https://discord.com", "discord", "discordAnch1");
-base.setStyle('discordAnch1', "color: transparent; font-size: 0px; margin-left: 1rem;")
+styles.setStyle('discordAnch1', "color: transparent; font-size: 0px; margin-left: 1rem;")
 
 base.addImage("./src/images/template/pyro.png", "pyrojaja");
-base.setStyle("pyrojaja", "width: 50rem")
+styles.setStyle("pyrojaja", "width: 50rem")
 
 base.appendTo("pyrojaja", "discordAnch1");
 
-base.setStyle("buttonplay", "background-color: black; color: white;");
+styles.setStyle("buttonplay", "background-color: black; color: white;");
 
 if(platform == "Desktop")
 {
