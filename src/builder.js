@@ -1,7 +1,8 @@
 var addedChilds = 0;
 var platform = "";
-var elementsver = "BETA 0.1.0";
-var stylesver = "BETA 0.0.0"; //not implemented
+var elementsHandlerVersion = "BETA 0.1.1";
+var stylesHandlerVersion = "BETA 0.0.0";
+var printedVersions = false;
 
 class Base
 {
@@ -15,58 +16,65 @@ class Base
     }
 
     //uses optf file extension handler, really simplified
-    setupVersions()
+    checkVersion()
     {
-        var versionsFile = fetch('./versions.optf'); //when current commit change to the repo file
-        versionsFile.then((resp) => {
+        var versionsFileGithub = fetch('https://raw.githubusercontent.com/SanicBTW/PageBuilder/master/versions.txt'); //when current commit change to the repo file
+        versionsFileGithub.then((resp) => {
             resp.text().then((text) => {
                 var entries = text.trim().split("\n");
                 for(var i in entries)
                 {
-                    var elementsFVer = entries[0];
-                    var stylesFVer = entries[1];
+                    if(printedVersions == false)
+                    {
+                        var gitElementsHandlerVersion = entries[0];
+                        var gitStylesHandlerVersion = entries[1];
+    
+                        console.log("GITHUB ELEMENTS HANDLER VERSION: " + gitElementsHandlerVersion);
+                        console.log("CURRENT ELEMENTS HANDLER VERSION: " + elementsHandlerVersion);
+
+                        if(elementsHandlerVersion > gitElementsHandlerVersion)
+                        {
+                            console.warn("[WARNING - Version checker - Elements Handler]\nCurrent version is newer than the old version\nPush commit or check the Github version");
+                        }
+                        if(elementsHandlerVersion == gitElementsHandlerVersion)
+                        {
+                            console.info("[INFO - Version checker - Elements Handler]\nUp to date");
+                        }
+                        if(elementsHandlerVersion < gitElementsHandlerVersion)
+                        {
+                            console.error("[ERROR - Version checker - Elements Handler]\nGithub version is newer\nCheck the current version and check the Github version");
+                        }
+    
+                        console.log("GITHUB STYLES HANDLER VERSION: " + gitStylesHandlerVersion);
+                        console.log("CURRENT STYLES HANDLER VERSION: " + stylesHandlerVersion);
+
+                        if(stylesHandlerVersion > gitStylesHandlerVersion)
+                        {
+                            console.warn("[WARNING - Version checker - Styles Handler]\nCurrent version is newer than the old version\nPush commit or check the Github version");
+                        }
+                        if(stylesHandlerVersion == gitStylesHandlerVersion)
+                        {
+                            console.info("[INFO - Version checker - Styles Handler]\nUp to date");
+                        }
+                        if(stylesHandlerVersion < gitStylesHandlerVersion)
+                        {
+                            console.error("[ERROR - Version checker - Styles Handler]\nGithub version is newer\nCheck the current version and check the Github version");
+                        }
+
+                        printedVersions = true;
+                    }
                 }
             })
         });
     }
-
-    checkVersion()
-    {
-        console.log("version checking disabled for this version")
-        /*
-        //might improve it soon
-        var versionFileGithub = fetch('https://raw.githubusercontent.com/SanicBTW/PageBuilder/master/version.txt');
-        versionFileGithub.then((resp) => {
-            resp.text().then((gitVer) => {
-                console.log("GITHUB VERSION: " + gitVer);
-                console.log("CURRENT VERSION: " + ver);
-
-                if(ver > gitVer)
-                {
-                    console.warn("[WARNING - Version checker]\nCurrent version is newer than the old version\nPush commit or check the Github version");
-                }
-                if(ver == gitVer)
-                {
-                    console.info("[INFO - Version checker]\nUp to date");
-                }
-                if(ver < gitVer)
-                {
-                    console.error("[ERROR - Version checker]\nGithub version is newer\nCheck the current version and check the Github version");
-                }
-
-            });
-        });*/
-    }
-
 }
 
-class Elements extends Base
+class ElementsHandler extends Base
 {
     constructor()
     {
         super();
         this.checkPlatform();
-        this.setupVersions();
         this.checkVersion();
     }
 

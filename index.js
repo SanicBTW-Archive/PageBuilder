@@ -1,4 +1,4 @@
-var ElementsHandler = new Elements();
+var elements = new ElementsHandler();
 /*var base = new Builder();
 var styles = new Styles();
 base.setBackground("./src/images/mean.jpeg");
