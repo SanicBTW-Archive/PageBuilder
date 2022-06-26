@@ -1,7 +1,7 @@
 var addedChilds = 0;
 var platform = "";
 //if you are copying this to your project (idk how to make it easy to import on a html file) please dont modify these
-var elementsHandlerVersion = "BETA 0.1.4";
+var elementsHandlerVersion = "BETA 0.1.5";
 var stylesHandlerVersion = "BETA 0.0.6";
 var printedVersions = false;
 
@@ -67,6 +67,19 @@ class Base
                 }
             })
         });
+    }
+
+    /**
+     * 
+     * @param {string} id The Element ID you want to asign the click event
+     * @param {function} exec The function you want to execute when element clicked
+     */
+    onClickHandler(id, exec)
+    {
+        var element = document.getElementById(id);
+        element.addEventListener("click", (click) => {
+            exec();
+        })
     }
 }
 
@@ -248,6 +261,29 @@ class ElementsHandler extends Base
         breakLine.id = `${id != null ? id : addedChilds}`;
         addedChilds += 1;
         document.body.append(breakLine);
+    }
+
+    /**
+     * 
+     * @param {string | string[]} id The Element ID you want to set the attribue to
+     * @param {string} property The property you want to asign
+     * @param {string} value The value for the property
+     */
+    setAttribute(id, property, value)
+    {
+        if(Array.isArray(id))
+        {
+            for(var i in id)
+            {
+                var element = document.getElementById(id[i]);
+                element.setAttribute(property, value);
+            }
+        }
+        else
+        {
+            var element = document.getElementById(id);
+            element.setAttribute(property, value);
+        }
     }
 }
 

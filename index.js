@@ -23,8 +23,9 @@ elements.addHeader("Everyone is so mean to me", "h1", "why");
 elements.addBreakline("break");
 styles.setStyle("why", "text-align: center;");
 
-elements.addHeader("Sanco", "h1", "centerHeader");
-elements.addParagraph("aka 'SanicBTW', 'Sanic', 'Saniczoned'", "alsoKnownAs");
+elements.addAnchor("https://discord.com", "discord", "centerHeader");
+elements.addAnchor("https://discord.com", "aka 'SanicBTW', 'Sanic', 'Saniczoned'", "alsoKnownAs");
+elements.setAttribute(["centerHeader", "alsoKnownAs"],"target", "_blank");
 elements.addParagraph("and idk what else", "lol");
 
 styles.setStyle(["centerHeader", "alsoKnownAs", "lol"], "font-family: 'Courier New', Courier, monospace; text-align: left;");
