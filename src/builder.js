@@ -1,7 +1,6 @@
 var addedChilds = 0;
 var platform = "";
-//if you are copying this to your project (idk how to make it easy to import on a html file) please dont modify these
-var elementsHandlerVersion = "BETA 0.1.5";
+var elementsHandlerVersion = "BETA 0.1.8";
 var stylesHandlerVersion = "BETA 0.0.6";
 var printedVersions = false;
 
@@ -79,6 +78,17 @@ class Base
         var element = document.getElementById(id);
         element.addEventListener("click", (click) => {
             exec();
+        })
+    }
+
+    /**
+     * 
+     * @param {function} exec The function you want to execute when key down
+     */
+    onKeydown(exec)
+    {
+        document.body.addEventListener("keydown", (key) => {
+            exec(key);
         })
     }
 }
@@ -236,18 +246,24 @@ class ElementsHandler extends Base
     /**
      * 
      * @param {string} path The video path
-     * @param {number} width The player width
+     * @param {string} width The player width (in CSS)
      * @param {boolean} showControls Toggle controls
+     * @param {boolean} autoPlay Auto play
      * @param {string} id The Element ID
+     * @param {function} onFinished Executes function when finishing the video
      */
-    addVideo(path, width, showControls, id)
+    addVideo(path, width, showControls, autoPlay, id, onFinished)
     {
         var video = document.createElement("video");
         video.src = path;
         video.id = `${id != null ? id : addedChilds}`;
         addedChilds += 1;
-        video.width = width;
+        video.style.width = `${width != null ? width : "50%"}`;
         video.controls = showControls;
+        video.autoplay = autoPlay;
+        video.addEventListener("ended", (vid) => {
+            onFinished();
+        })
         document.body.append(video);
     }
 
@@ -284,6 +300,17 @@ class ElementsHandler extends Base
             var element = document.getElementById(id);
             element.setAttribute(property, value);
         }
+    }
+
+    /**
+     * 
+     * @param {string} id The Element ID text you want to change
+     * @param {string} newText The new text you want to assign to the element 
+     */
+    changeText(id, newText)
+    {
+        var element = document.getElementById(id);
+        element.innerText = newText;
     }
 }
 
