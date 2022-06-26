@@ -1,5 +1,7 @@
 var elements = new ElementsHandler();
 var styles = new StylesHandler();
+var basicDebugger = new Debugger(true);
+basicDebugger.log("[INFO] Wassup")
 var sameKeyPressTimes = 0;
 
 var easterEggComb = {

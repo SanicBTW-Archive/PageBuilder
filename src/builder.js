@@ -1,7 +1,8 @@
 var addedChilds = 0;
 var platform = "";
-var elementsHandlerVersion = "BETA 0.1.8";
-var stylesHandlerVersion = "BETA 0.0.6";
+var basicDebuggerVersion = "1.0";
+var elementsHandlerVersion = "1.8";
+var stylesHandlerVersion = "1.6";
 var printedVersions = false;
 
 class Base
@@ -18,7 +19,7 @@ class Base
     //uses optf file extension handler, really simplified
     checkVersion()
     {
-        var versionsFileGithub = fetch('https://raw.githubusercontent.com/SanicBTW/PageBuilder/master/versions.txt'); //when current commit change to the repo file
+        var versionsFileGithub = fetch('../versions.txt' /*'https://raw.githubusercontent.com/SanicBTW/PageBuilder/master/versions.txt '*/); //when current commit change to the repo file
         versionsFileGithub.then((resp) => {
             resp.text().then((text) => {
                 var entries = text.trim().split("\n");
@@ -26,9 +27,26 @@ class Base
                 {
                     if(printedVersions == false)
                     {
-                        var gitElementsHandlerVersion = entries[0];
-                        var gitStylesHandlerVersion = entries[1];
+                        var gitBasicDebuggerVersion = entries[0];
+                        var gitElementsHandlerVersion = entries[1];
+                        var gitStylesHandlerVersion = entries[2];
     
+                        console.log("GITHUB BASIC DEBUGGER VERSION: " + gitBasicDebuggerVersion);
+                        console.log("CURRENT BASIC DEBUGGER VERSION: " + basicDebuggerVersion);
+
+                        if(basicDebuggerVersion > gitBasicDebuggerVersion)
+                        {
+                            console.warn("[WARNING - Version checker - Basic Debugger]\nCurrent version is newer than the old version\nPush commit or check the Github version");
+                        }
+                        if(basicDebuggerVersion == gitBasicDebuggerVersion)
+                        {
+                            console.info("[INFO - Version checker - Basic Debugger]\nUp to date");
+                        }
+                        if(basicDebuggerVersion < gitBasicDebuggerVersion)
+                        {
+                            console.error("[ERROR - Version checker - Basic Debugger]\nGithub version is newer\nCheck the current version and check the Github version");
+                        }
+
                         console.log("GITHUB ELEMENTS HANDLER VERSION: " + gitElementsHandlerVersion);
                         console.log("CURRENT ELEMENTS HANDLER VERSION: " + elementsHandlerVersion);
 
@@ -389,5 +407,44 @@ class StylesHandler extends Base
         icon.setAttribute('rel', "shortcut icon");
         icon.setAttribute("href", path);
         document.head.appendChild(icon);
+    }
+}
+
+class Debugger
+{
+    /**
+     * 
+     * @param {boolean} show If the debugger should show
+     */
+    constructor(show)
+    {
+        if(show == true)
+        {
+            var debugDiv = document.createElement("div");
+            debugDiv.id = "debugDiv";
+            debugDiv.style = "position: fixed; bottom: 0; right: 0; background-color: black; color: white; opacity: 50%; margin: 1rem";
+            document.body.appendChild(debugDiv);
+
+            var debugEntries = document.createElement("div");
+            debugEntries.id = "debugger";
+            debugEntries.style = "margin: 1rem;";
+            debugDiv.appendChild(debugEntries);
+
+            var initialized = document.createElement("p");
+            initialized.innerText = "Initialized - Basic Debugger " + basicDebuggerVersion;
+            debugEntries.appendChild(initialized);
+        }
+    }
+
+    /**
+     * 
+     * @param {string} text What to log
+     */
+    log(text)
+    {
+        var debugDiv = document.getElementById("debugger");
+        var newLog = document.createElement("p");
+        newLog.innerText = text;
+        debugDiv.appendChild(newLog);
     }
 }
