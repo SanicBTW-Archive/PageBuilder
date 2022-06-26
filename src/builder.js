@@ -19,7 +19,7 @@ class Base
     //uses optf file extension handler, really simplified
     checkVersion()
     {
-        var versionsFileGithub = fetch('../versions.txt' /*'https://raw.githubusercontent.com/SanicBTW/PageBuilder/master/versions.txt '*/); //when current commit change to the repo file
+        var versionsFileGithub = fetch('https://raw.githubusercontent.com/SanicBTW/PageBuilder/master/versions.txt ');
         versionsFileGithub.then((resp) => {
             resp.text().then((text) => {
                 var entries = text.trim().split("\n");
