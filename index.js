@@ -45,6 +45,12 @@ elements.appendTo("mainDiv", "first");
 
 elements.appendTo(["why", "centerHeader", "alsoKnownAs", "lol"], "mainDiv");
 
+elements.addButton("clean logs", function() {
+    basicDebugger.clear();
+}, "cleanbutton");
+
+elements.appendTo("cleanbutton", "mainDiv");
+
 elements.onKeydown(function(key) {
     var lastKey = "";
 

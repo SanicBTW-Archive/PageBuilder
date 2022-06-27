@@ -1,9 +1,10 @@
 var addedChilds = 0;
 var platform = "";
-var basicDebuggerVersion = "1.0";
+var basicDebuggerVersion = "1.1";
 var elementsHandlerVersion = "1.8";
 var stylesHandlerVersion = "1.6";
 var printedVersions = false;
+var addedLogs = 0;
 
 class Base
 {
@@ -442,9 +443,26 @@ class Debugger
      */
     log(text)
     {
-        var debugDiv = document.getElementById("debugger");
+        var entries = document.getElementById("debugger");
         var newLog = document.createElement("p");
+        newLog.id = addedLogs;
+        addedLogs++;
         newLog.innerText = text;
-        debugDiv.appendChild(newLog);
+        entries.appendChild(newLog);
+    }
+
+    clear()
+    {
+        //code is subject to change
+        var entries = document.getElementById("debugger");
+        entries.childNodes.forEach(child => {
+            entries.removeChild(child);
+        });
+        this.log("[CODE] Done clearing");
+        setTimeout(() => {
+            entries.childNodes.forEach(child => {
+                entries.removeChild(child);
+            });
+        }, 2500);
     }
 }
