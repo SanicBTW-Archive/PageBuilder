@@ -1,7 +1,8 @@
 var elements = new ElementsHandler();
 var styles = new StylesHandler();
 var basicDebugger = new Debugger(true);
-basicDebugger.log("[INFO] Wassup")
+basicDebugger.addToHeader("[INFO] Wassup")
+basicDebugger.log("ayo wassup my guy")
 var sameKeyPressTimes = 0;
 
 var easterEggComb = {
@@ -78,3 +79,6 @@ elements.onKeydown(function(key) {
         window.location.assign("./src/iHateYou.html");
     }
 })
+
+basicDebugger.log(addedChilds);
+basicDebugger.log(defaultElementID);

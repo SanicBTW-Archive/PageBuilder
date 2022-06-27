@@ -1,10 +1,12 @@
 var addedChilds = 0;
 var platform = "";
-var basicDebuggerVersion = "1.2";
-var elementsHandlerVersion = "1.8";
+var basicDebuggerVersion = "1.3";
+var elementsHandlerVersion = "1.9";
 var stylesHandlerVersion = "1.6";
 var printedVersions = false;
 var addedLogs = 0;
+var addedDebugHeaders = 0; //?? sorry lol
+var defaultElementID = ""; //asign it when changing the added childs var
 
 class Base
 {
@@ -128,10 +130,12 @@ class ElementsHandler extends Base
      */
     addImage(path, id)
     {
+        addedChilds++;
+
         var img = document.createElement("img");
         img.src = path;
-        img.id =  `${id != null ? id : addedChilds}`;
-        addedChilds += 1;
+        defaultElementID = `element${addedChilds}`;
+        img.id =  `${id != null ? id : defaultElementID}`;
         document.body.append(img);
     }
 
@@ -143,10 +147,12 @@ class ElementsHandler extends Base
      */
     addHeader(text, type, id)
     {
+        addedChilds++;
+
         var header = document.createElement(type);
         header.innerText = text;
-        header.id = `${id != null ? id : addedChilds}`;
-        addedChilds += 1;
+        defaultElementID = `element${addedChilds}`;
+        header.id = `${id != null ? id : defaultElementID}`;
         document.body.append(header);
     }
 
@@ -157,10 +163,12 @@ class ElementsHandler extends Base
      */
     addParagraph(text, id)
     {
+        addedChilds++;
+
         var paragraph = document.createElement("p");
         paragraph.innerText = text;
-        paragraph.id = `${id != null ? id : addedChilds}`;
-        addedChilds += 1;
+        defaultElementID = `element${addedChilds}`;
+        paragraph.id = `${id != null ? id : defaultElementID}`;
         document.body.append(paragraph);
     }
 
@@ -172,11 +180,13 @@ class ElementsHandler extends Base
      */
     addAudio(path, showControls, id)
     {
+        addedChilds++;
+
         var audio = document.createElement("audio");
         audio.src = path;
         audio.controls = showControls;
-        audio.id = `${id != null ? id : addedChilds}`;
-        addedChilds += 1;
+        defaultElementID = `element${addedChilds}`;
+        audio.id = `${id != null ? id : defaultElementID}`;
         document.body.append(audio);
     }
 
@@ -188,14 +198,16 @@ class ElementsHandler extends Base
      */
     addButton(text, onClick, id)
     {
+        addedChilds++;
+
         var button = document.createElement("button");
         button.addEventListener("click", (click) => {
             onClick();
         });
         button.type = "button";
         button.innerText = text;
-        button.id = `${id != null ? id : addedChilds}`;
-        addedChilds += 1;
+        defaultElementID = `element${addedChilds}`;
+        button.id = `${id != null ? id : defaultElementID}`;
         document.body.append(button);
     }
 
@@ -207,11 +219,13 @@ class ElementsHandler extends Base
      */
     addAnchor(link, text, id)
     {
+        addedChilds++;
+
         var anch = document.createElement("a");
         anch.href = link;
         anch.innerText = text;
-        anch.id = `${id != null ? id : addedChilds}`;
-        addedChilds += 1;
+        defaultElementID = `element${addedChilds}`;
+        anch.id = `${id != null ? id : defaultElementID}`;
         document.body.append(anch);
     }
 
@@ -245,9 +259,11 @@ class ElementsHandler extends Base
      */
     addDiv(id)
     {
+        addedChilds++;
+
         var newDiv = document.createElement("div");
-        newDiv.id = `${id != null ? id : addedChilds}`;
-        addedChilds += 1;
+        defaultElementID = `element${addedChilds}`;
+        newDiv.id = `${id != null ? id : defaultElementID}`;
         document.body.append(newDiv);
     }
 
@@ -273,10 +289,12 @@ class ElementsHandler extends Base
      */
     addVideo(path, width, showControls, autoPlay, id, onFinished)
     {
+        addedChilds++;
+
         var video = document.createElement("video");
         video.src = path;
-        video.id = `${id != null ? id : addedChilds}`;
-        addedChilds += 1;
+        defaultElementID = `element${addedChilds}`;
+        video.id = `${id != null ? id : defaultElementID}`;
         video.style.width = `${width != null ? width : "50%"}`;
         video.controls = showControls;
         video.autoplay = autoPlay;
@@ -292,9 +310,11 @@ class ElementsHandler extends Base
      */
     addBreakline(id)
     {
+        addedChilds++;
+
         var breakLine = document.createElement("br");
-        breakLine.id = `${id != null ? id : addedChilds}`;
-        addedChilds += 1;
+        defaultElementID = `element${addedChilds}`;
+        breakLine.id = `${id != null ? id : defaultElementID}`;
         document.body.append(breakLine);
     }
 
@@ -422,9 +442,14 @@ class Debugger
         if(show == true)
         {
             var debugDiv = document.createElement("div");
-            debugDiv.id = "debugDiv";
+            debugDiv.id = "debuggerDiv";
             debugDiv.style = "position: fixed; bottom: 0; right: 0; background-color: black; color: white; opacity: 50%; margin: 1rem";
             document.body.appendChild(debugDiv);
+
+            var debugHeader = document.createElement("div");
+            debugHeader.id = "debuggerHeader";
+            debugHeader.style = "margin: 1rem; background-color: gray;";
+            debugDiv.appendChild(debugHeader);
 
             var debugEntries = document.createElement("div");
             debugEntries.id = "debugger";
@@ -433,7 +458,7 @@ class Debugger
 
             var initialized = document.createElement("p");
             initialized.innerText = "Initialized - Basic Debugger " + basicDebuggerVersion;
-            debugEntries.appendChild(initialized);
+            debugHeader.appendChild(initialized);
         }
     }
 
@@ -458,5 +483,19 @@ class Debugger
         entries.childNodes.forEach(child => {
             entries.removeChild(child);
         });
+    }
+
+    /**
+     * 
+     * @param {string} text What to add to the header
+     */
+    addToHeader(text)
+    {
+        var header = document.getElementById("debuggerHeader");
+        var newText = document.createElement("p");
+        newText.id = `debugHeader${addedDebugHeaders}`;
+        addedDebugHeaders++;
+        newText.innerText = text;
+        header.appendChild(newText);
     }
 }
