@@ -1,6 +1,6 @@
 var addedChilds = 0;
 var platform = "";
-var basicDebuggerVersion = "1.1";
+var basicDebuggerVersion = "1.2";
 var elementsHandlerVersion = "1.8";
 var stylesHandlerVersion = "1.6";
 var printedVersions = false;
@@ -458,11 +458,5 @@ class Debugger
         entries.childNodes.forEach(child => {
             entries.removeChild(child);
         });
-        this.log("[CODE] Done clearing");
-        setTimeout(() => {
-            entries.childNodes.forEach(child => {
-                entries.removeChild(child);
-            });
-        }, 2500);
     }
 }
