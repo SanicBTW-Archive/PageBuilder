@@ -1,8 +1,8 @@
 var addedChilds = 0;
 var platform = "";
-var basicDebuggerVersion = "1.3";
+var basicDebuggerVersion = "1.4";
 var elementsHandlerVersion = "1.9";
-var stylesHandlerVersion = "1.6";
+var stylesHandlerVersion = "1.7";
 var printedVersions = false;
 var addedLogs = 0;
 var addedDebugHeaders = 0; //?? sorry lol
@@ -429,6 +429,37 @@ class StylesHandler extends Base
         icon.setAttribute("href", path);
         document.head.appendChild(icon);
     }
+
+
+    /**
+     * 
+     * @param {string} style CSS styling to apply to the debug div
+     */
+    setDebugDivStyle(style)
+    {
+        var debugDiv = document.getElementById("debuggerDiv");
+        debugDiv.style.cssText += style;
+    }
+
+    /**
+     * 
+     * @param {string} style CSS styling to apply to the debug header div
+     */
+    setDebugHeaderStyle(style)
+    {
+        var debugHeader = document.getElementById("debuggerHeader");
+        debugHeader.style.cssText += style;
+    }
+
+    /**
+     * 
+     * @param {string} style CSS styling to apply to the debug entries div
+     */
+    setDebugEntriesStyle(style)
+    {
+        var debugEntries = document.getElementById("debugger");
+        debugEntries.style.cssText += style;
+    }
 }
 
 class Debugger
@@ -448,7 +479,7 @@ class Debugger
 
             var debugHeader = document.createElement("div");
             debugHeader.id = "debuggerHeader";
-            debugHeader.style = "margin: 1rem; background-color: gray;";
+            debugHeader.style = "margin: 1rem;";
             debugDiv.appendChild(debugHeader);
 
             var debugEntries = document.createElement("div");
@@ -473,6 +504,7 @@ class Debugger
         newLog.id = addedLogs;
         addedLogs++;
         newLog.innerText = text;
+        analyzeAndSet(text, newLog);
         entries.appendChild(newLog);
     }
 
@@ -496,6 +528,25 @@ class Debugger
         newText.id = `debugHeader${addedDebugHeaders}`;
         addedDebugHeaders++;
         newText.innerText = text;
+        analyzeAndSet(text, newText);
         header.appendChild(newText);
     }
+}
+
+function analyzeAndSet(text, element)
+{
+    var styling = "";
+    if(text.toString().toLowerCase().includes("info"))
+    {
+        styling = "color: aqua; ";
+    }
+    if(text.toString().toLowerCase().includes("warning"))
+    {
+        styling = "color: yellow; ";
+    }
+    if(text.toString().toLowerCase().includes("error"))
+    {
+        styling = "color: red; ";
+    }
+    element.style.cssText += styling;
 }

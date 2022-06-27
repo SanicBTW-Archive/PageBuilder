@@ -82,3 +82,6 @@ elements.onKeydown(function(key) {
 
 basicDebugger.log(addedChilds);
 basicDebugger.log(defaultElementID);
+styles.setDebugDivStyle("opacity: 100%;");
+styles.setDebugHeaderStyle("background-color: gray; ");
+styles.setDebugEntriesStyle("background-color: red; ");
