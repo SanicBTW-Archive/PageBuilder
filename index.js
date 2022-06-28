@@ -79,6 +79,11 @@ elements.onKeydown(function(key) {
         elements.changeText("why", "warned you");
         window.location.assign("./src/iHateYou.html");
     }
+
+    if(key.key == "s")
+    {
+        animations.stopUpdate();
+    }
 })
 
 basicDebugger.log(addedChilds);
@@ -87,4 +92,5 @@ styles.setDebugDivStyle("opacity: 100%;");
 styles.setDebugHeaderStyle("background-color: gray; ");
 styles.setDebugEntriesStyle("background-color: red; ");
 
-animations.bgColorFade([255, 0, 0], [0, 0, 255], 75, 100, "why");
+//animations.bgColorFade([255, 0, 0], [0, 0, 255], 75, 100, "why");
+animations.rainbow("why");
