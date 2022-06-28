@@ -4,7 +4,7 @@ var basicDebuggerVersion = "1.4.1";
 var elementsHandlerVersion = "1.9";
 var stylesHandlerVersion = "1.7";
 //yes im adding a handler to each thing i start adding (events for example lmao)
-var animationsHandlerVersion = "1.2";
+var animationsHandlerVersion = "1.3";
 var printedVersions = false;
 var addedLogs = 0;
 var addedDebugHeaders = 0; //?? sorry lol
@@ -649,17 +649,33 @@ class AnimationHandler extends Base
     }
 
     /**
-     * @deprecated Since 0.9
-     * @param {string} property The property you want to change
-     * @param {string} duration The duration of the property
-     * @param {string} timingFunction Type of ease? idk lol
-     * @param {string} delay The delay of the transition
-     * @param {string} id The Element ID you want to assign the transition to
+     * 
+     * @param {number[]} startcolor Array of RGB values
+     * @param {number[]} endcolor Array of RGB values
+     * @param {number} steps Amount of steps for each color to change
+     * @param {number} timeElapsed The amount of time that it has to end the fade
+     * @param {string} id The Element ID you want to asign this bg fade animation 
      */
-    setTransition(property, duration, timingFunction, delay, id)
+    textColorFade(startcolor, endcolor, steps, timeElapsed, id)
     {
         var element = document.getElementById(id);
-        element.style.cssText += `transition: ${property} ${duration} ${timingFunction} ${delay};`;
+        var red_change = (startcolor[0] - endcolor[0]) / steps;
+        var green_change = (startcolor[1] - endcolor[1]) / steps;
+        var blue_change = (startcolor[2] - endcolor[2]) / steps;
+
+        var currentcolor = startcolor;
+        var stepcount = 0;
+        var timer = setInterval(function() {
+            currentcolor[0] = parseInt(currentcolor[0] - red_change);
+            currentcolor[1] = parseInt(currentcolor[1] - green_change);
+            currentcolor[2] = parseInt(currentcolor[2] - blue_change);
+            element.style.backgroundColor = 'rgb(' + currentcolor.toString() + ')';
+            stepcount += 1;
+            if (stepcount >= timeElapsed) {
+                element.style.color = 'rgb(' + endcolor.toString() + ')';
+                clearInterval(timer);
+            }
+        }, 50);
     }
 }
 
