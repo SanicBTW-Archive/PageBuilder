@@ -4,7 +4,7 @@ var basicDebuggerVersion = "1.4.1";
 var elementsHandlerVersion = "1.9";
 var stylesHandlerVersion = "1.7";
 //yes im adding a handler to each thing i start adding (events for example lmao)
-var animationsHandlerVersion = "1.3";
+var animationsHandlerVersion = "1.3.1";
 var printedVersions = false;
 var addedLogs = 0;
 var addedDebugHeaders = 0; //?? sorry lol
@@ -669,7 +669,7 @@ class AnimationHandler extends Base
             currentcolor[0] = parseInt(currentcolor[0] - red_change);
             currentcolor[1] = parseInt(currentcolor[1] - green_change);
             currentcolor[2] = parseInt(currentcolor[2] - blue_change);
-            element.style.backgroundColor = 'rgb(' + currentcolor.toString() + ')';
+            element.style.color = 'rgb(' + currentcolor.toString() + ')';
             stepcount += 1;
             if (stepcount >= timeElapsed) {
                 element.style.color = 'rgb(' + endcolor.toString() + ')';
