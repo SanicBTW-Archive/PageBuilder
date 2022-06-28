@@ -84,6 +84,10 @@ elements.onKeydown(function(key) {
     {
         animations.stopUpdate();
     }
+    if(key.key == "u")
+    {
+        animations.update();
+    }
 })
 
 basicDebugger.log(addedChilds);

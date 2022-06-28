@@ -4,7 +4,7 @@ var basicDebuggerVersion = "1.4.1";
 var elementsHandlerVersion = "1.9";
 var stylesHandlerVersion = "1.7";
 //yes im adding a handler to each thing i start adding (events for example lmao)
-var animationsHandlerVersion = "1.1";
+var animationsHandlerVersion = "1.2";
 var printedVersions = false;
 var addedLogs = 0;
 var addedDebugHeaders = 0; //?? sorry lol
@@ -12,6 +12,21 @@ var defaultElementID = ""; //asign it when changing the added childs var
 var tickerElapsedInterval = null;
 var elapsed = 0;
 var updating = false;
+
+//only for the rainbow thingy, totally not based off kade engine fps rainbow thingy lol
+var skipped = 0;
+var curColor = 0;
+
+var color1 = [148, 0, 211].toString();
+var color2 = [75, 0, 130].toString();
+var color3 = [0, 0, 255].toString();
+var color4 = [0, 255, 0].toString();
+var color5 = [255, 255, 0].toString();
+var color6 = [255, 127, 0].toString();
+var color7 = [255, 0, 0].toString();
+
+var colors = [color1, color2, color3, color4, color5, color6, color7];
+var rainbowyElement = "";
 
 class Base
 {
@@ -140,6 +155,22 @@ class Base
         tickerElapsedInterval = setInterval(function(){
             console.log("Tick!");
             elapsed++;
+
+            //rainbow
+            if(updating && rainbowyElement != null && skipped >= 6)
+            {
+                if(curColor >= colors.length)
+                {
+                    curColor = 0;
+                }
+                rainbowyElement.style.color = 'rgb(' + colors[curColor] + ')';
+                curColor ++;
+                skipped = 0;
+            }
+            else
+            {
+                skipped++;
+            }
         }, 2);
     }
 
@@ -611,55 +642,10 @@ class AnimationHandler extends Base
         }, 50);
     }
 
-    //THIS IS NOT AN ANIMATION, ITS JUST COLOR TEXT CHANGING, NOT ANIMATED (cuz it would be a lot of work)
     rainbow(id)
     {
         var element = document.getElementById(id);
-
-        var color1 = [148, 0, 211].toString();
-        var color2 = [75, 0, 130].toString();
-        var color3 = [0, 0, 255].toString();
-        var color4 = [0, 255, 0].toString();
-        var color5 = [255, 255, 0].toString();
-        var color6 = [255, 127, 0].toString();
-        var color7 = [255, 0, 0].toString();
-
-        var colors = [color1, color2, color3, color4, color5, color6, color7];
-        var curColor = 0;
-        /*
-        var themColors = [
-            [148, 0, 211],
-            [75, 0, 130],
-            [0, 0, 255],
-            [0, 255, 0],
-            [255, 255, 0],
-            [255, 127, 0],
-            [255, 0, 0]
-        ];
-
-        var curColor = 0;
-        var skipped = 0;
-        if(skipped >= 6)
-        {
-            if(curColor > themColors.length)
-                curColor = 0;
-            setInterval(function() {
-                element.style.color = 'rgb(' + parseInt(themColors[curColor].toString()); + ')';
-                curColor ++;
-                skipped = 0;
-            }, 2);
-        }
-        else
-        {
-            var timerSkipped = setInterval(function() {
-                alert("hola")
-                skipped++;
-                if(skipped == 6)
-                {
-                    clearInterval(timerSkipped);
-                }
-            }, 2)
-        }*/
+        rainbowyElement = element;
     }
 
     /**
