@@ -1,6 +1,6 @@
 var elements = new ElementsHandler();
 var styles = new StylesHandler();
-var basicDebugger = new Debugger(true);
+var basicDebugger = new Debugger(false);
 basicDebugger.addToHeader("[INFO] Wassup")
 basicDebugger.log("ayo wassup my guy")
 var animations = new AnimationHandler();

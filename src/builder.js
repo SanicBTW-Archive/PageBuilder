@@ -1,10 +1,10 @@
 var addedChilds = 0;
 var platform = "";
-var basicDebuggerVersion = "1.4.1";
-var elementsHandlerVersion = "1.9";
-var stylesHandlerVersion = "1.7";
+var basicDebuggerVersion = "1.0";
+var elementsHandlerVersion = "1.0";
+var stylesHandlerVersion = "1.0";
 //yes im adding a handler to each thing i start adding (events for example lmao)
-var animationsHandlerVersion = "1.3.1";
+var animationsHandlerVersion = "1.0";
 var printedVersions = false;
 var addedLogs = 0;
 var addedDebugHeaders = 0; //?? sorry lol
@@ -12,6 +12,7 @@ var defaultElementID = ""; //asign it when changing the added childs var
 var tickerElapsedInterval = null;
 var elapsed = 0;
 var updating = false;
+var showingDebugger = false;
 
 //only for the rainbow thingy, totally not based off kade engine fps rainbow thingy lol
 var skipped = 0;
@@ -507,8 +508,11 @@ class StylesHandler extends Base
      */
     setDebugDivStyle(style)
     {
-        var debugDiv = document.getElementById("debuggerDiv");
-        debugDiv.style.cssText += style;
+        if(showingDebugger)
+        {
+            var debugDiv = document.getElementById("debuggerDiv");
+            debugDiv.style.cssText += style;
+        }
     }
 
     /**
@@ -517,8 +521,11 @@ class StylesHandler extends Base
      */
     setDebugHeaderStyle(style)
     {
-        var debugHeader = document.getElementById("debuggerHeader");
-        debugHeader.style.cssText += style;
+        if(showingDebugger)
+        {
+            var debugHeader = document.getElementById("debuggerHeader");
+            debugHeader.style.cssText += style;    
+        }
     }
 
     /**
@@ -527,8 +534,11 @@ class StylesHandler extends Base
      */
     setDebugEntriesStyle(style)
     {
-        var debugEntries = document.getElementById("debugger");
-        debugEntries.style.cssText += style;
+        if(showingDebugger)
+        {
+            var debugEntries = document.getElementById("debugger");
+            debugEntries.style.cssText += style;    
+        }
     }
 }
 
@@ -542,6 +552,7 @@ class Debugger
     {
         if(show == true)
         {
+            showingDebugger = true;
             var debugDiv = document.createElement("div");
             debugDiv.id = "debuggerDiv";
             debugDiv.style = "position: fixed; bottom: 0; right: 0; background-color: black; color: white; opacity: 50%; margin: 1rem";
@@ -569,23 +580,29 @@ class Debugger
      */
     log(text)
     {
-        var entries = document.getElementById("debugger");
-        var newLog = document.createElement("p");
-        newLog.id = addedLogs;
-        addedLogs++;
-        newLog.innerText = text;
-        analyzeAndSet(text, newLog);
-        entries.appendChild(newLog);
+        if(showingDebugger == true)
+        {
+            var entries = document.getElementById("debugger");
+            var newLog = document.createElement("p");
+            newLog.id = addedLogs;
+            addedLogs++;
+            newLog.innerText = text;
+            analyzeAndSet(text, newLog);
+            entries.appendChild(newLog);
+        }
     }
 
     clear()
     {
-        //code is subject to change
-        var entries = document.getElementById("debugger");
-        entries.childNodes.forEach(child => {
-            entries.removeChild(child);
-        });
-        addedLogs = 0;
+        if(showingDebugger == true)
+        {
+            //code is subject to change
+            var entries = document.getElementById("debugger");
+            entries.childNodes.forEach(child => {
+                entries.removeChild(child);
+            });
+            addedLogs = 0;
+        }
     }
 
     /**
@@ -594,13 +611,16 @@ class Debugger
      */
     addToHeader(text)
     {
-        var header = document.getElementById("debuggerHeader");
-        var newText = document.createElement("p");
-        newText.id = `debugHeader${addedDebugHeaders}`;
-        addedDebugHeaders++;
-        newText.innerText = text;
-        analyzeAndSet(text, newText);
-        header.appendChild(newText);
+        if(showingDebugger == true)
+        {
+            var header = document.getElementById("debuggerHeader");
+            var newText = document.createElement("p");
+            newText.id = `debugHeader${addedDebugHeaders}`;
+            addedDebugHeaders++;
+            newText.innerText = text;
+            analyzeAndSet(text, newText);
+            header.appendChild(newText);    
+        }
     }
 }
 
