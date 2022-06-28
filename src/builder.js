@@ -1,8 +1,10 @@
 var addedChilds = 0;
 var platform = "";
-var basicDebuggerVersion = "1.4";
+var basicDebuggerVersion = "1.4.1";
 var elementsHandlerVersion = "1.9";
 var stylesHandlerVersion = "1.7";
+//yes im adding a handler to each thing i start adding (events for example lmao)
+var animationsHandlerVersion = "1.0";
 var printedVersions = false;
 var addedLogs = 0;
 var addedDebugHeaders = 0; //?? sorry lol
@@ -19,7 +21,6 @@ class Base
         console.log("Platform: " + platform);
     }
 
-    //uses optf file extension handler, really simplified
     checkVersion()
     {
         var versionsFileGithub = fetch('https://raw.githubusercontent.com/SanicBTW/PageBuilder/master/versions.txt ');
@@ -33,10 +34,11 @@ class Base
                         var gitBasicDebuggerVersion = entries[0];
                         var gitElementsHandlerVersion = entries[1];
                         var gitStylesHandlerVersion = entries[2];
-    
+                        var gitAnimationsHandlerVersion = entries[3];
+        
                         console.log("GITHUB BASIC DEBUGGER VERSION: " + gitBasicDebuggerVersion);
                         console.log("CURRENT BASIC DEBUGGER VERSION: " + basicDebuggerVersion);
-
+        
                         if(basicDebuggerVersion > gitBasicDebuggerVersion)
                         {
                             console.warn("[WARNING - Version checker - Basic Debugger]\nCurrent version is newer than the old version\nPush commit or check the Github version");
@@ -49,10 +51,10 @@ class Base
                         {
                             console.error("[ERROR - Version checker - Basic Debugger]\nGithub version is newer\nCheck the current version and check the Github version");
                         }
-
+        
                         console.log("GITHUB ELEMENTS HANDLER VERSION: " + gitElementsHandlerVersion);
                         console.log("CURRENT ELEMENTS HANDLER VERSION: " + elementsHandlerVersion);
-
+        
                         if(elementsHandlerVersion > gitElementsHandlerVersion)
                         {
                             console.warn("[WARNING - Version checker - Elements Handler]\nCurrent version is newer than the old version\nPush commit or check the Github version");
@@ -65,10 +67,10 @@ class Base
                         {
                             console.error("[ERROR - Version checker - Elements Handler]\nGithub version is newer\nCheck the current version and check the Github version");
                         }
-    
+        
                         console.log("GITHUB STYLES HANDLER VERSION: " + gitStylesHandlerVersion);
                         console.log("CURRENT STYLES HANDLER VERSION: " + stylesHandlerVersion);
-
+        
                         if(stylesHandlerVersion > gitStylesHandlerVersion)
                         {
                             console.warn("[WARNING - Version checker - Styles Handler]\nCurrent version is newer than the old version\nPush commit or check the Github version");
@@ -82,11 +84,27 @@ class Base
                             console.error("[ERROR - Version checker - Styles Handler]\nGithub version is newer\nCheck the current version and check the Github version");
                         }
 
+                        console.log("GITHUB ANIMATION HANDLER VERSION: " + gitAnimationsHandlerVersion);
+                        console.log("CURRENT ANIMATION HANDLER VERSION: " + animationsHandlerVersion);
+        
+                        if(animationsHandlerVersion > gitAnimationsHandlerVersion)
+                        {
+                            console.warn("[WARNING - Version checker - Animations Handler]\nCurrent version is newer than the old version\nPush commit or check the Github version");
+                        }
+                        if(animationsHandlerVersion == gitAnimationsHandlerVersion)
+                        {
+                            console.info("[INFO - Version checker - Animations Handler]\nUp to date");
+                        }
+                        if(animationsHandlerVersion < gitAnimationsHandlerVersion)
+                        {
+                            console.error("[ERROR - Version checker - Animations Handler]\nGithub version is newer\nCheck the current version and check the Github version");
+                        }
+        
                         printedVersions = true;
                     }
                 }
             })
-        });
+        });    
     }
 
     /**
@@ -515,6 +533,7 @@ class Debugger
         entries.childNodes.forEach(child => {
             entries.removeChild(child);
         });
+        addedLogs = 0;
     }
 
     /**
@@ -530,6 +549,58 @@ class Debugger
         newText.innerText = text;
         analyzeAndSet(text, newText);
         header.appendChild(newText);
+    }
+}
+
+class AnimationHandler extends Base
+{
+    constructor()
+    {
+        super();
+    }
+
+    /**
+     * 
+     * @param {number[]} startcolor Array of RGB values
+     * @param {number[]} endcolor Array of RGB values
+     * @param {number} steps Amount of steps for each color to change
+     * @param {number} timeElapsed The amount of time that it has to end the fade
+     * @param {string} id The Element ID you want to asign this bg fade animation 
+     */
+    bgColorFade(startcolor, endcolor, steps, timeElapsed, id)
+    {
+        var element = document.getElementById(id);
+        var red_change = (startcolor[0] - endcolor[0]) / steps;
+        var green_change = (startcolor[1] - endcolor[1]) / steps;
+        var blue_change = (startcolor[2] - endcolor[2]) / steps;
+
+        var currentcolor = startcolor;
+        var stepcount = 0;
+        var timer = setInterval(function(){
+            currentcolor[0] = parseInt(currentcolor[0] - red_change);
+            currentcolor[1] = parseInt(currentcolor[1] - green_change);
+            currentcolor[2] = parseInt(currentcolor[2] - blue_change);
+            element.style.backgroundColor = 'rgb(' + currentcolor.toString() + ')';
+            stepcount += 1;
+            if (stepcount >= timeElapsed) {
+                element.style.backgroundColor = 'rgb(' + endcolor.toString() + ')';
+                clearInterval(timer);
+            }
+        }, 50);
+    }
+
+    /**
+     * @deprecated Since 0.9
+     * @param {string} property The property you want to change
+     * @param {string} duration The duration of the property
+     * @param {string} timingFunction Type of ease? idk lol
+     * @param {string} delay The delay of the transition
+     * @param {string} id The Element ID you want to assign the transition to
+     */
+    setTransition(property, duration, timingFunction, delay, id)
+    {
+        var element = document.getElementById(id);
+        element.style.cssText += `transition: ${property} ${duration} ${timingFunction} ${delay};`;
     }
 }
 

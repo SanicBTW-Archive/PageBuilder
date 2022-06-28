@@ -3,6 +3,7 @@ var styles = new StylesHandler();
 var basicDebugger = new Debugger(true);
 basicDebugger.addToHeader("[INFO] Wassup")
 basicDebugger.log("ayo wassup my guy")
+var animations = new AnimationHandler();
 var sameKeyPressTimes = 0;
 
 var easterEggComb = {
@@ -33,7 +34,7 @@ elements.setClass("first", "outer");
 
 elements.addHeader("Everyone is so mean to me", "h1", "why");
 elements.addBreakline("break");
-styles.setStyle("why", "text-align: center; background-color: white;");
+//styles.setStyle("why", "text-align: center; background-color: white;");
 
 elements.addAnchor("https://discord.com", "discord", "centerHeader");
 elements.addAnchor("https://discord.com", "aka 'SanicBTW', 'Sanic', 'Saniczoned'", "alsoKnownAs");
@@ -85,3 +86,5 @@ basicDebugger.log(defaultElementID);
 styles.setDebugDivStyle("opacity: 100%;");
 styles.setDebugHeaderStyle("background-color: gray; ");
 styles.setDebugEntriesStyle("background-color: red; ");
+
+animations.bgColorFade([255, 0, 0], [0, 0, 255], 75, 100, "why");
