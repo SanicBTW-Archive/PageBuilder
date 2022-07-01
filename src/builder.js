@@ -1,7 +1,7 @@
 var addedChilds = 0;
 var platform = "";
 var basicDebuggerVersion = "1.0";
-var elementsHandlerVersion = "1.0";
+var elementsHandlerVersion = "1.1";
 var stylesHandlerVersion = "1.0";
 //yes im adding a handler to each thing i start adding (events for example lmao)
 var animationsHandlerVersion = "1.0";
