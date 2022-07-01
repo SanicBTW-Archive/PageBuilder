@@ -1,6 +1,6 @@
 var elements = new ElementsHandler();
 var styles = new StylesHandler();
-var basicDebugger = new Debugger(false);
+var basicDebugger = new Debugger(true);
 basicDebugger.addToHeader("[INFO] Wassup")
 basicDebugger.log("ayo wassup my guy")
 var animations = new AnimationHandler();
@@ -39,13 +39,13 @@ elements.addBreakline("break");
 elements.addAnchor("https://discord.com", "discord", "centerHeader");
 elements.addAnchor("https://discord.com", "aka 'SanicBTW', 'Sanic', 'Saniczoned'", "alsoKnownAs");
 elements.setAttribute(["centerHeader", "alsoKnownAs"],"target", "_blank");
-elements.addParagraph("and idk what else", "lol");
+elements.addParagraph(["and idk what else", "wassup lmao", "ayo"], ["lol", "lol1", "lol2"]);
 
-styles.setStyle(["centerHeader", "alsoKnownAs", "lol"], "font-family: 'Courier New', Courier, monospace; text-align: left;");
+styles.setStyle(["centerHeader", "alsoKnownAs", "lol", "lol1", "lol2"], "font-family: 'Courier New', Courier, monospace; text-align: left;");
 
 elements.appendTo("mainDiv", "first");
 
-elements.appendTo(["why", "centerHeader", "alsoKnownAs", "lol"], "mainDiv");
+elements.appendTo(["why", "centerHeader", "alsoKnownAs", "lol", "lol1", "lol2"], "mainDiv");
 
 elements.addButton("clean logs", function() {
     basicDebugger.clear();

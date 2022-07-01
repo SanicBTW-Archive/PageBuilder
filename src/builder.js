@@ -229,18 +229,59 @@ class ElementsHandler extends Base
 
     /**
      * 
-     * @param {string} text The text to display
-     * @param {string} id The Element ID
+     * @param {string | string[]} text The text or array text to display
+     * @param {string | string[]} id The Element ID or array of ids to assign to each paragraph
      */
     addParagraph(text, id)
     {
-        addedChilds++;
+        if(Array.isArray(text) && Array.isArray(id))
+        {
+            basicDebugger.log("text and ids are arrays");
+            if(id.length == text.length)
+            {
+                for(var i in text)
+                {
+                    addedChilds++;
+                    var paragraph = document.createElement("p");
+                    paragraph.innerText = text[i];
+                    //we not setting a default element id as we have the same length of ids and texts
+                    //defaultElementID = `element${addedChilds}`;
+                    paragraph.id = id[i];
+                    document.body.append(paragraph);
+                }
+            }
+            else
+            {
+                basicDebugger.log("[ERROR] Paragraph IDs array is not the same length as text array");
+            }
+        }
+        else if(Array.isArray(text) && !Array.isArray(id))
+        {
+            var localParagraphs = 0;
+            basicDebugger.log("text is an array, ids not");
+            for(var i in text)
+            {
+                addedChilds++;
+                localParagraphs++;
 
-        var paragraph = document.createElement("p");
-        paragraph.innerText = text;
-        defaultElementID = `element${addedChilds}`;
-        paragraph.id = `${id != null ? id : defaultElementID}`;
-        document.body.append(paragraph);
+                var paragraph = document.createElement("p");
+                paragraph.innerText = text[i];
+                defaultElementID = `element${addedChilds}`;
+                idFixed = `${id}${localParagraphs}`;
+                paragraph.id = `${id != null ? idFixed : defaultElementID}`;
+                document.body.append(paragraph);
+            }
+        }
+        else
+        {
+            addedChilds++;
+
+            var paragraph = document.createElement("p");
+            paragraph.innerText = text;
+            defaultElementID = `element${addedChilds}`;
+            paragraph.id = `${id != null ? id : defaultElementID}`;
+            document.body.append(paragraph);
+        }
     }
 
     /**
