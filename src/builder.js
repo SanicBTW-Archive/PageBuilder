@@ -254,6 +254,7 @@ class ElementsHandler extends Base
         else if(Array.isArray(text) && !Array.isArray(id))
         {
             var localParagraphs = 0;
+            var idFixed = "";
             for(var i in text)
             {
                 addedChilds++;
